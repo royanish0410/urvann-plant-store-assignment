@@ -227,7 +227,7 @@ export default function HomePage() {
           <span className="text-2xl font-bold">urvann</span>
         </div>
         <p className="text-sm leading-relaxed">
-          Your trusted partner in bringing nature closer to home with premium quality plants and expert care guidance.
+          Urvann is your one-stop online nursery for plants, planters, gardening accessories, and tools. Order fresh plants and get free home delivery on the next day!
         </p>
       </div>
 
