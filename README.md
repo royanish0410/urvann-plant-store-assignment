@@ -1,135 +1,279 @@
-# Turborepo starter
+# 🌱 Urvann Plant Store
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern, full-stack plant e-commerce application built with React, Node.js, Express, and MongoDB. This application allows users to browse, search, and filter through a comprehensive catalog of plants while providing admin functionality to manage inventory.
 
-## Using this example
+## 🚀 Features
 
-Run the following command:
+### 🏪 Plant Catalog
+- **Grid/List View**: Browse plants in an attractive, responsive layout
+- **Plant Details**: View comprehensive information including:
+  - Plant name and description
+  - Pricing information
+  - Multiple categories per plant
+  - Stock availability status
+  - Plant images and additional details
 
-```sh
-npx create-turbo@latest
-```
+### 🔍 Search & Filter
+- **Smart Search**: Case-insensitive plant search by name
+- **Category Search**: Find plants by category keywords (e.g., "home decor" finds Money Plant)
+- **Advanced Filtering**: Filter plants by categories (Indoor, Outdoor, Succulent, Air Purifying, etc.)
+- **Real-time Results**: Instant search results as you type
 
-## What's inside?
+### 👨‍💼 Admin Features
+- **Add New Plants**: Comprehensive form with validation for:
+  - Plant name and description
+  - Price setting
+  - Multiple category assignment
+  - Stock availability management
+  - Image upload functionality
+- **Input Validation**: Robust client and server-side validation
+- **Admin Authentication**: Secure admin access controls
 
-This Turborepo includes the following packages/apps:
+### 📱 Responsive Design
+- **Mobile-First**: Optimized for all device sizes
+- **Modern UI**: Clean, intuitive user interface
+- **Reusable Components**: Modular React component architecture
+- **Loading States**: Smooth loading animations and error handling
 
-### Apps and Packages
+## 🛠️ Tech Stack
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### Frontend
+- **React 18**: Modern functional components with hooks
+- **React Router**: Client-side routing
+- **Axios**: HTTP client for API requests
+- **CSS3**: Responsive styling with modern layouts
+- **Component Architecture**: Reusable and maintainable components
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### Backend
+- **Node.js**: Server-side runtime
+- **Express.js**: Web application framework
+- **MongoDB**: NoSQL database for plant data
+- **Mongoose**: MongoDB object modeling
+- **CORS**: Cross-origin resource sharing
+- **Express Validator**: Input validation middleware
 
-### Utilities
+### Additional Tools
+- **RESTful API**: Clean API architecture
+- **Error Handling**: Comprehensive error management
+- **Environment Configuration**: Secure config management
 
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
-
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
+## 📂 Project Structure
 
 ```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+URVANN-PLANT/
+├── apps/
+│   ├── api/                    # Backend application
+│   │   ├── config/            # Database and app configuration
+│   │   ├── controllers/       # Route controllers
+│   │   ├── middleware/        # Custom middleware
+│   │   ├── models/           # MongoDB schemas
+│   │   ├── routes/           # API routes
+│   │   └── utils/            # Utility functions
+│   └── web/                   # Frontend application
+│       ├── public/           # Static assets
+│       └── src/
+│           ├── components/   # Reusable React components
+│           ├── pages/       # Page components
+│           ├── services/    # API service functions
+│           ├── styles/      # CSS styling
+│           └── utils/       # Frontend utilities
+├── libs/                     # Shared libraries
+├── packages/                 # Package configurations
+└── tools/                   # Development tools
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## 🚦 Getting Started
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
+### Prerequisites
+- Node.js (v16 or higher)
+- MongoDB (local installation or MongoDB Atlas)
+- npm or yarn package manager
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+### Installation
 
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
+1. **Clone the repository**
+```bash
+git clone <https://github.com/royanish0410/urvann-plant-store-assignment>
+cd urvann-plant-strore-assignment
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+2. **Install dependencies**
+```bash
+# Install backend dependencies
+cd apps/api
+npm install
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+# Install frontend dependencies
+cd ../web
+npm install
 ```
 
-## Useful Links
+3. **Environment Configuration**
 
-Learn more about the power of Turborepo:
+Create `.env` files in both `apps/api` and `apps/web`:
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+**Backend (`apps/api/.env`)**
+```env
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/urvann-plants
+NODE_ENV=development
+JWT_SECRET=your-secret-key
+```
+
+**Frontend (`apps/web/.env`)**
+```env
+REACT_APP_API_URL=http://localhost:5000/api
+```
+
+4. **Database Setup**
+```bash
+# Start MongoDB service (if running locally)
+mongod
+
+# The application will automatically create the database and collections
+```
+
+5. **Start the Application**
+
+**Backend Server**
+```bash
+cd apps/api
+npm start
+# Server runs on http://localhost:5000
+```
+
+**Frontend Application**
+```bash
+cd apps/web
+npm start
+# Application runs on http://localhost:3000
+```
+
+## 📊 Database
+
+The application includes a comprehensive database of **50+ plants** with realistic:
+- Plant names and descriptions
+- Pricing information
+- Categories (Indoor, Outdoor, Succulent, Air Purifying, Home Decor, etc.)
+- Stock availability
+- Plant care information
+
+### Sample Plant Categories
+- 🏠 Indoor Plants
+- 🌞 Outdoor Plants
+- 🌵 Succulents
+- 🌿 Air Purifying
+- 🎨 Home Decor
+- 💚 Low Maintenance
+- 🌸 Flowering Plants
+
+## 🔌 API Endpoints
+
+### Plants
+- `GET /api/plants` - Get all plants with pagination
+- `GET /api/plants/search?q={query}` - Search plants by name or category
+- `GET /api/plants/filter?category={category}` - Filter by category
+- `GET /api/plants/:id` - Get single plant details
+- `POST /api/plants` - Add new plant (Admin)
+- `PUT /api/plants/:id` - Update plant (Admin)
+- `DELETE /api/plants/:id` - Delete plant (Admin)
+
+### Categories
+- `GET /api/categories` - Get all categories
+- `POST /api/categories` - Add new category (Admin)
+
+### Admin
+- `POST /api/admin/login` - Admin authentication
+- `GET /api/admin/dashboard` - Admin dashboard data
+
+## 🎨 Key Features Implemented
+
+### Frontend Excellence
+- ⚡ Fast, responsive React application
+- 🎯 Intuitive user experience
+- 📱 Mobile-first responsive design
+- 🔄 Real-time search and filtering
+- ⏳ Loading states and error handling
+- 🧩 Modular component architecture
+
+### Backend Performance
+- 🚀 Optimized MongoDB queries
+- 📈 Scalable API architecture
+- 🔒 Input validation and sanitization
+- 🛡️ Error handling middleware
+- 📊 Efficient data modeling
+
+### Extra Mile Features
+- 🌟 Advanced search functionality
+- 🎭 Admin panel with authentication
+- 📸 Image upload capabilities
+- 🏷️ Dynamic category management
+- 💾 Local storage for user preferences
+- 🔍 Auto-complete search suggestions
+
+## 🚀 Performance Optimizations
+
+- **Database Indexing**: Optimized MongoDB indexes for fast queries
+- **API Pagination**: Efficient data loading with pagination
+- **Component Memoization**: React performance optimizations
+- **Lazy Loading**: On-demand component loading
+- **Caching Strategy**: Intelligent data caching
+
+## 🧪 Testing
+
+```bash
+# Run backend tests
+cd apps/api
+npm test
+
+# Run frontend tests
+cd apps/web
+npm test
+```
+
+## 🌐 Deployment
+
+The application is ready for deployment on platforms like:
+- **Frontend**: Vercel, Netlify, or AWS S3
+- **Backend**: Heroku, AWS EC2, or DigitalOcean
+- **Database**: MongoDB Atlas
+
+### Deployment Commands
+```bash
+# Build frontend for production
+cd apps/web
+npm run build
+
+# Start production server
+cd apps/api
+npm run start:prod
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## 👨‍💻 Author
+
+Built with ❤️ for the Urvann Plant Store assignment.
+
+---
+
+### 🌟 Project Highlights
+
+- **50+ Plant Database**: Comprehensive plant catalog with realistic data
+- **Advanced Search**: Multi-criteria search and filtering
+- **Admin Panel**: Full CRUD operations for plant management
+- **Responsive Design**: Beautiful UI across all devices
+- **Performance Optimized**: Fast loading and efficient queries
+- **Production Ready**: Scalable architecture and deployment ready
+
+*Happy Planting! 🌱*
