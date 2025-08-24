@@ -6,36 +6,57 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Search, ShoppingCart, User, Leaf, Settings, Filter, X, ChevronDown } from "lucide-react"
+import { 
+  Search, 
+  ShoppingCart, 
+  User, 
+  Leaf, 
+  Settings, 
+  Filter, 
+  X, 
+  ChevronDown,
+  MapPin,
+  Instagram,
+  Facebook,
+  Youtube,
+  Linkedin,
+  MessageCircle,
+  Mail,
+  HelpCircle
+} from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
-import { categories, difficulties, lightRequirements } from "@/lib/plants-data"
+
+// Mock data - replace with your actual data
+const categories = ["All", "Indoor Plants", "Outdoor Plants", "Succulents", "Flowering Plants"]
+const difficulties = ["All", "Easy", "Medium", "Hard"]
+const lightRequirements = ["All", "Low", "Medium", "High"]
 
 interface HeaderProps {
-  searchQuery: string
-  onSearchChange: (query: string) => void
-  selectedCategory: string
-  selectedDifficulty: string
-  selectedLight: string
-  onCategoryChange: (category: string) => void
-  onDifficultyChange: (difficulty: string) => void
-  onLightChange: (light: string) => void
-  onClearFilters: () => void
-  resultCount: number
+  searchQuery?: string
+  onSearchChange?: (query: string) => void
+  selectedCategory?: string
+  selectedDifficulty?: string
+  selectedLight?: string
+  onCategoryChange?: (category: string) => void
+  onDifficultyChange?: (difficulty: string) => void
+  onLightChange?: (light: string) => void
+  onClearFilters?: () => void
+  resultCount?: number
 }
 
 function FilterContent({
-  selectedCategory,
-  selectedDifficulty,
-  selectedLight,
-  onCategoryChange,
-  onDifficultyChange,
-  onLightChange,
-  onClearFilters,
-  resultCount,
+  selectedCategory = "All",
+  selectedDifficulty = "All",
+  selectedLight = "All",
+  onCategoryChange = () => {},
+  onDifficultyChange = () => {},
+  onLightChange = () => {},
+  onClearFilters = () => {},
+  resultCount = 0,
 }: Omit<HeaderProps, "searchQuery" | "onSearchChange">) {
   return (
-    <div className="space-y-4 w-80">
+    <div className="space-y-4 w-full">
       <div className="flex items-center justify-between">
         <div>
           <h3 className="font-semibold">Filters</h3>
@@ -89,61 +110,59 @@ function FilterContent({
         </div>
       )}
 
-      {/* Category Filter */}
-      <div>
-        <h4 className="font-medium mb-2 text-sm">Category</h4>
-        <div className="grid grid-cols-2 gap-1">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? "default" : "ghost"}
-              size="sm"
-              className="justify-start text-xs h-8"
-              onClick={() => onCategoryChange(category)}
-            >
-              {category}
-            </Button>
-          ))}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Category Filter */}
+        <div>
+          <h4 className="font-medium mb-3 text-sm">Category</h4>
+          <div className="space-y-1">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? "default" : "ghost"}
+                size="sm"
+                className="w-full justify-start text-xs h-8"
+                onClick={() => onCategoryChange(category)}
+              >
+                {category}
+              </Button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <Separator />
-
-      {/* Difficulty Filter */}
-      <div>
-        <h4 className="font-medium mb-2 text-sm">Care Level</h4>
-        <div className="grid grid-cols-2 gap-1">
-          {difficulties.map((difficulty) => (
-            <Button
-              key={difficulty}
-              variant={selectedDifficulty === difficulty ? "default" : "ghost"}
-              size="sm"
-              className="justify-start text-xs h-8"
-              onClick={() => onDifficultyChange(difficulty)}
-            >
-              {difficulty}
-            </Button>
-          ))}
+        {/* Difficulty Filter */}
+        <div>
+          <h4 className="font-medium mb-3 text-sm">Care Level</h4>
+          <div className="space-y-1">
+            {difficulties.map((difficulty) => (
+              <Button
+                key={difficulty}
+                variant={selectedDifficulty === difficulty ? "default" : "ghost"}
+                size="sm"
+                className="w-full justify-start text-xs h-8"
+                onClick={() => onDifficultyChange(difficulty)}
+              >
+                {difficulty}
+              </Button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <Separator />
-
-      {/* Light Requirement Filter */}
-      <div>
-        <h4 className="font-medium mb-2 text-sm">Light Needs</h4>
-        <div className="grid grid-cols-1 gap-1">
-          {lightRequirements.map((light) => (
-            <Button
-              key={light}
-              variant={selectedLight === light ? "default" : "ghost"}
-              size="sm"
-              className="justify-start text-xs h-8"
-              onClick={() => onLightChange(light)}
-            >
-              {light} Light
-            </Button>
-          ))}
+        {/* Light Requirement Filter */}
+        <div>
+          <h4 className="font-medium mb-3 text-sm">Light Needs</h4>
+          <div className="space-y-1">
+            {lightRequirements.map((light) => (
+              <Button
+                key={light}
+                variant={selectedLight === light ? "default" : "ghost"}
+                size="sm"
+                className="w-full justify-start text-xs h-8"
+                onClick={() => onLightChange(light)}
+              >
+                {light} Light
+              </Button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -151,97 +170,117 @@ function FilterContent({
 }
 
 export function Header({
-  searchQuery,
-  onSearchChange,
-  selectedCategory,
-  selectedDifficulty,
-  selectedLight,
-  onCategoryChange,
-  onDifficultyChange,
-  onLightChange,
-  onClearFilters,
-  resultCount,
+  searchQuery = "",
+  onSearchChange = () => {},
+  selectedCategory = "All",
+  selectedDifficulty = "All",
+  selectedLight = "All",
+  onCategoryChange = () => {},
+  onDifficultyChange = () => {},
+  onLightChange = () => {},
+  onClearFilters = () => {},
+  resultCount = 0,
 }: HeaderProps) {
   const [isSearchFocused, setIsSearchFocused] = useState(false)
   const hasActiveFilters = selectedCategory !== "All" || selectedDifficulty !== "All" || selectedLight !== "All"
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 group">
-          <div className="flex items-center justify-center w-8 h-8 bg-primary rounded-full group-hover:scale-110 transition-transform duration-200">
-            <Leaf className="w-5 h-5 text-primary-foreground" />
+    <div className="w-full">
+      {/* Top Banner */}
+      <div className="bg-green-600 text-white text-sm py-2">
+        <div className="container mx-auto px-4 flex items-center justify-between">
+          <div className="flex items-center space-x-4">
+            {/* Social Media Icons */}
+            <div className="flex items-center space-x-2">
+              <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 p-1 h-6 w-6">
+                <Instagram className="w-3 h-3" />
+              </Button>
+              <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 p-1 h-6 w-6">
+                <Facebook className="w-3 h-3" />
+              </Button>
+              <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 p-1 h-6 w-6">
+                <Youtube className="w-3 h-3" />
+              </Button>
+              <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 p-1 h-6 w-6">
+                <Linkedin className="w-3 h-3" />
+              </Button>
+              <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 p-1 h-6 w-6">
+                <MessageCircle className="w-3 h-3" />
+              </Button>
+              <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 p-1 h-6 w-6">
+                <Mail className="w-3 h-3" />
+              </Button>
+            </div>
           </div>
-          <span className="text-xl font-bold text-primary group-hover:text-primary/80 transition-colors">Urvann</span>
-        </Link>
-
-        {/* Search and Filters */}
-        <div className="flex-1 max-w-2xl mx-8 flex items-center gap-3">
-          <div className="flex-1 relative">
-            <Search
-              className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 transition-colors ${
-                isSearchFocused ? "text-primary" : "text-muted-foreground"
-              }`}
-            />
-            <Input
-              placeholder="Search plants..."
-              className={`pl-10 bg-muted/50 transition-all duration-200 ${
-                isSearchFocused ? "ring-2 ring-primary/20 bg-background" : ""
-              }`}
-              value={searchQuery}
-              onChange={(e) => onSearchChange(e.target.value)}
-              onFocus={() => setIsSearchFocused(true)}
-              onBlur={() => setIsSearchFocused(false)}
-            />
+          
+          {/* Promotional Text */}
+          <div className="text-center flex-1">
+            <span className="text-xs md:text-sm">
+              ✨ Flat Discount on orders above 999. Use code WOW50. Free Next Day Delivery on orders received by 7 PM ✨
+            </span>
           </div>
-
-          <div className="hidden md:block">
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className={`relative ${hasActiveFilters ? "border-primary text-primary" : ""}`}
-                >
-                  <Filter className="w-4 h-4 mr-2" />
-                  Filters
-                  {hasActiveFilters && <div className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />}
-                  <ChevronDown className="w-3 h-3 ml-1" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent align="end" className="p-4">
-                <FilterContent
-                  selectedCategory={selectedCategory}
-                  selectedDifficulty={selectedDifficulty}
-                  selectedLight={selectedLight}
-                  onCategoryChange={onCategoryChange}
-                  onDifficultyChange={onDifficultyChange}
-                  onLightChange={onLightChange}
-                  onClearFilters={onClearFilters}
-                  resultCount={resultCount}
-                />
-              </PopoverContent>
-            </Popover>
+          
+          <div className="hidden md:block text-xs">
+            WhatsApp
           </div>
+        </div>
+      </div>
 
-          <div className="md:hidden">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className={`relative ${hasActiveFilters ? "border-primary text-primary" : ""}`}
-                >
-                  <Filter className="w-4 h-4" />
-                  {hasActiveFilters && <div className="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full" />}
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="w-80">
-                <SheetHeader>
-                  <SheetTitle>Filter Plants</SheetTitle>
-                </SheetHeader>
-                <div className="mt-6">
+      {/* Main Header */}
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2 group">
+            <div className="flex items-center justify-center w-10 h-10 bg-green-600 rounded-lg group-hover:scale-110 transition-transform duration-200">
+              <Leaf className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-4xl font-bold text-green-600 group-hover:text-green-500 transition-colors">
+              urvann
+            </span>
+          </Link>
+
+          {/* Search Bar */}
+          <div className="flex-1 max-w-2xl mx-8 flex items-center gap-3">
+            <div className="flex-1 relative">
+              <Search
+                className={`absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 transition-colors ${
+                  isSearchFocused ? "text-green-600" : "text-muted-foreground"
+                }`}
+              />
+              <Input
+                placeholder="Search by Products"
+                className={`pl-10 bg-muted/50 border-2 transition-all duration-200 ${
+                  isSearchFocused ? "ring-2 ring-green-600/20 bg-background border-green-600" : "border-gray-200"
+                }`}
+                value={searchQuery}
+                onChange={(e) => onSearchChange(e.target.value)}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setIsSearchFocused(false)}
+              />
+              <Button
+                size="sm"
+                className="absolute right-1 top-1/2 transform -translate-y-1/2 bg-yellow-500 hover:bg-yellow-600 text-black h-8 px-3"
+              >
+                <Search className="w-4 h-4" />
+              </Button>
+            </div>
+
+            {/* Filters for larger screens */}
+            <div className="hidden md:block">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className={`relative min-w-[100px] ${hasActiveFilters ? "border-green-600 text-green-600" : ""}`}
+                  >
+                    <Filter className="w-4 h-4 mr-2" />
+                    Filters
+                    {hasActiveFilters && <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-600 rounded-full" />}
+                    <ChevronDown className="w-3 h-3 ml-1" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent align="end" className="p-4 w-96">
                   <FilterContent
                     selectedCategory={selectedCategory}
                     selectedDifficulty={selectedDifficulty}
@@ -252,34 +291,71 @@ export function Header({
                     onClearFilters={onClearFilters}
                     resultCount={resultCount}
                   />
-                </div>
-              </SheetContent>
-            </Sheet>
+                </PopoverContent>
+              </Popover>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex items-center space-x-2">
+            <Button variant="ghost" size="sm" className="hidden md:flex items-center space-x-1 hover:bg-green-50 hover:text-green-600 transition-colors">
+              <HelpCircle className="w-4 h-4" />
+              <span className="text-xs">GET HELP</span>
+            </Button>
+            
+            <Link href="/admin">
+              <Button variant="ghost" size="sm" className="hidden md:flex items-center space-x-1 hover:bg-green-50 hover:text-green-600 transition-colors">
+                <User className="w-4 h-4" />
+                <span className="text-xs">LOGIN</span>
+              </Button>
+            </Link>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative hover:bg-green-50 hover:text-green-600 transition-colors"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              <span className="absolute -top-1 -right-1 bg-yellow-500 text-black text-xs rounded-full w-5 h-5 flex items-center justify-center font-medium">
+                0
+              </span>
+            </Button>
+
+            {/* Mobile Filter Button */}
+            <div className="md:hidden">
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className={`relative ${hasActiveFilters ? "border-green-600 text-green-600" : ""}`}
+                  >
+                    <Filter className="w-4 h-4" />
+                    {hasActiveFilters && <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-600 rounded-full" />}
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="left" className="w-80">
+                  <SheetHeader>
+                    <SheetTitle>Filter Plants</SheetTitle>
+                  </SheetHeader>
+                  <div className="mt-6">
+                    <FilterContent
+                      selectedCategory={selectedCategory}
+                      selectedDifficulty={selectedDifficulty}
+                      selectedLight={selectedLight}
+                      onCategoryChange={onCategoryChange}
+                      onDifficultyChange={onDifficultyChange}
+                      onLightChange={onLightChange}
+                      onClearFilters={onClearFilters}
+                      resultCount={resultCount}
+                    />
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
-
-        {/* Action Buttons */}
-        <div className="flex items-center space-x-2">
-          <Link href="/admin">
-            <Button variant="ghost" size="icon" className="hover:bg-primary/10 hover:text-primary transition-colors">
-              <Settings className="w-5 h-5" />
-            </Button>
-          </Link>
-          <Button variant="ghost" size="icon" className="hover:bg-primary/10 hover:text-primary transition-colors">
-            <User className="w-5 h-5" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="relative hover:bg-primary/10 hover:text-primary transition-colors"
-          >
-            <ShoppingCart className="w-5 h-5" />
-            <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-xs rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
-              0
-            </span>
-          </Button>
-        </div>
-      </div>
-    </header>
+      </header>
+    </div>
   )
 }

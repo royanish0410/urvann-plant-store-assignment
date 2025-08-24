@@ -1,5 +1,4 @@
 "use client"
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -33,32 +32,68 @@ function FilterContent({
 }: PlantFiltersProps) {
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="font-semibold text-lg">Filters</h3>
-          <p className="text-sm text-muted-foreground">{resultCount} plants found</p>
+      {/* Active Filters Section */}
+      <div className="flex flex-col space-y-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-bold text-lg">Filters</h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={onClearFilters}
+            className="text-muted-foreground hover:text-foreground"
+          >
+            <X className="w-4 h-4 mr-1" />
+            Clear All
+          </Button>
         </div>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onClearFilters}
-          className="text-muted-foreground hover:text-foreground"
-        >
-          <X className="w-4 h-4 mr-1" />
-          Clear All
-        </Button>
+        {(selectedCategory !== "All" || selectedDifficulty !== "All" || selectedLight !== "All") && (
+          <div>
+            <h4 className="font-medium mb-3 text-sm text-muted-foreground">Active Filters</h4>
+            <div className="flex flex-wrap gap-2">
+              {selectedCategory !== "All" && (
+                <Badge
+                  variant="secondary"
+                  className="bg-green-500 text-white hover:bg-green-600 cursor-pointer"
+                  onClick={() => onCategoryChange("All")}
+                >
+                  {selectedCategory} <X className="w-3 h-3 ml-1" />
+                </Badge>
+              )}
+              {selectedDifficulty !== "All" && (
+                <Badge
+                  variant="secondary"
+                  className="bg-green-500 text-white hover:bg-green-600 cursor-pointer"
+                  onClick={() => onDifficultyChange("All")}
+                >
+                  {selectedDifficulty} <X className="w-3 h-3 ml-1" />
+                </Badge>
+              )}
+              {selectedLight !== "All" && (
+                <Badge
+                  variant="secondary"
+                  className="bg-green-500 text-white hover:bg-green-600 cursor-pointer"
+                  onClick={() => onLightChange("All")}
+                >
+                  {selectedLight} <X className="w-3 h-3 ml-1" />
+                </Badge>
+              )}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Category Filter */}
       <div>
-        <h4 className="font-medium mb-3 text-foreground">Category</h4>
-        <div className="space-y-2">
+        <h4 className="font-semibold mb-4">Category</h4>
+        <div className="grid grid-cols-2 gap-2">
           {categories.map((category) => (
             <Button
               key={category}
-              variant={selectedCategory === category ? "default" : "ghost"}
+              variant={selectedCategory === category ? "default" : "outline"}
               size="sm"
-              className="w-full justify-start transition-all duration-200 hover:translate-x-1"
+              className={`w-full justify-start py-2 px-3 transition-all duration-200 ${
+                selectedCategory === category ? "bg-green-500 hover:bg-green-600 text-white" : "hover:bg-gray-100"
+              }`}
               onClick={() => onCategoryChange(category)}
             >
               {category}
@@ -71,14 +106,16 @@ function FilterContent({
 
       {/* Difficulty Filter */}
       <div>
-        <h4 className="font-medium mb-3 text-foreground">Care Level</h4>
-        <div className="space-y-2">
+        <h4 className="font-semibold mb-4">Care Level</h4>
+        <div className="grid grid-cols-2 gap-2">
           {difficulties.map((difficulty) => (
             <Button
               key={difficulty}
-              variant={selectedDifficulty === difficulty ? "default" : "ghost"}
+              variant={selectedDifficulty === difficulty ? "default" : "outline"}
               size="sm"
-              className="w-full justify-start transition-all duration-200 hover:translate-x-1"
+              className={`w-full justify-start py-2 px-3 transition-all duration-200 ${
+                selectedDifficulty === difficulty ? "bg-green-500 hover:bg-green-600 text-white" : "hover:bg-gray-100"
+              }`}
               onClick={() => onDifficultyChange(difficulty)}
             >
               {difficulty}
@@ -91,59 +128,23 @@ function FilterContent({
 
       {/* Light Requirement Filter */}
       <div>
-        <h4 className="font-medium mb-3 text-foreground">Light Needs</h4>
-        <div className="space-y-2">
+        <h4 className="font-semibold mb-4">Light Needs</h4>
+        <div className="grid grid-cols-2 gap-2">
           {lightRequirements.map((light) => (
             <Button
               key={light}
-              variant={selectedLight === light ? "default" : "ghost"}
+              variant={selectedLight === light ? "default" : "outline"}
               size="sm"
-              className="w-full justify-start transition-all duration-200 hover:translate-x-1"
+              className={`w-full justify-start py-2 px-3 transition-all duration-200 ${
+                selectedLight === light ? "bg-green-500 hover:bg-green-600 text-white" : "hover:bg-gray-100"
+              }`}
               onClick={() => onLightChange(light)}
             >
-              {light} Light
+              {light}
             </Button>
           ))}
         </div>
       </div>
-
-      <Separator />
-
-      {/* Active Filters */}
-      {(selectedCategory !== "All" || selectedDifficulty !== "All" || selectedLight !== "All") && (
-        <div>
-          <h4 className="font-medium mb-3 text-foreground">Active Filters</h4>
-          <div className="flex flex-wrap gap-2">
-            {selectedCategory !== "All" && (
-              <Badge
-                variant="secondary"
-                className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground transition-colors"
-                onClick={() => onCategoryChange("All")}
-              >
-                {selectedCategory} <X className="w-3 h-3 ml-1" />
-              </Badge>
-            )}
-            {selectedDifficulty !== "All" && (
-              <Badge
-                variant="secondary"
-                className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground transition-colors"
-                onClick={() => onDifficultyChange("All")}
-              >
-                {selectedDifficulty} <X className="w-3 h-3 ml-1" />
-              </Badge>
-            )}
-            {selectedLight !== "All" && (
-              <Badge
-                variant="secondary"
-                className="cursor-pointer hover:bg-destructive hover:text-destructive-foreground transition-colors"
-                onClick={() => onLightChange("All")}
-              >
-                {selectedLight} Light <X className="w-3 h-3 ml-1" />
-              </Badge>
-            )}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
@@ -151,31 +152,33 @@ function FilterContent({
 export function PlantFilters(props: PlantFiltersProps) {
   return (
     <>
+      {/* Mobile Filter Sheet */}
       <div className="lg:hidden mb-6">
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" className="w-full bg-transparent">
+            <Button variant="outline" className="w-full bg-background shadow-sm hover:bg-accent">
               <Filter className="w-4 h-4 mr-2" />
-              Filters ({props.resultCount} results)
+              Filters ({props.resultCount})
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-80">
-            <SheetHeader>
-              <SheetTitle>Filter Plants</SheetTitle>
+          <SheetContent side="left" className="w-[320px] p-0">
+            <SheetHeader className="p-6 pb-4 border-b">
+              <SheetTitle className="text-xl font-bold">Filter Plants</SheetTitle>
             </SheetHeader>
-            <div className="mt-6">
+            <div className="p-6 pt-0">
               <FilterContent {...props} />
             </div>
           </SheetContent>
         </Sheet>
       </div>
 
+      {/* Desktop Filter Card */}
       <div className="hidden lg:block">
-        <Card className="sticky top-20 shadow-lg border-0">
+        <Card className="sticky top-20 w-[320px] shadow-lg border-0">
           <CardHeader className="pb-4">
-            <CardTitle className="text-lg">Filter Plants</CardTitle>
+            <CardTitle className="text-xl font-bold">Filter Plants</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-6 pt-0">
             <FilterContent {...props} />
           </CardContent>
         </Card>
