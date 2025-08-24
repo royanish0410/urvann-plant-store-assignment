@@ -23,7 +23,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-
+import Image from "next/image"; 
 // Mock data - replace with your actual data
 const categories = ["All", "Indoor Plants", "Outdoor Plants", "Succulents", "Flowering Plants"];
 const difficulties = ["All", "Easy", "Medium", "Hard"];
@@ -215,8 +215,14 @@ export function Header({
         <div className="container mx-auto px-4 h-20 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="flex items-center justify-center w-10 h-10 bg-green-600 rounded-lg group-hover:scale-110 transition-transform duration-200">
-              <Leaf className="w-6 h-6 text-white" />
+            <div className="flex items-center justify-center  bg-green-600 rounded-lg group-hover:scale-110 transition-transform duration-200">
+              <Image
+                src="/logo.jpeg"
+                alt="Urvann Logo"
+                width={35}
+                height={35}
+                className="object-contain"
+              />
             </div>
             <span className="text-2xl md:text-4xl font-bold text-green-600 group-hover:text-green-500 transition-colors">
               urvann

@@ -9,6 +9,8 @@ import { apiClient } from "@/lib/api-client"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ArrowUp } from "lucide-react"
+import { Leaf, Instagram, Facebook, Youtube, Linkedin } from "lucide-react";
+import Image from "next/image";
 
 export default function HomePage() {
   const [plants, setPlants] = useState<Plant[]>([])
@@ -207,49 +209,77 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="bg-card border-t py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
-            <div className="md:col-span-1">
-              <h3 className="font-semibold text-lg mb-4">About Urvann</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Your trusted partner in bringing nature closer to home with premium quality plants and expert care
-                guidance.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg mb-4">Categories</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="hover:text-foreground transition-colors cursor-pointer">Indoor Plants</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Outdoor Plants</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Succulents</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Flowering Plants</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg mb-4">Support</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="hover:text-foreground transition-colors cursor-pointer">Plant Care Guide</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Delivery Info</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Return Policy</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Contact Us</li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-semibold text-lg mb-4">Connect</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
-                <li className="hover:text-foreground transition-colors cursor-pointer">Instagram</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Facebook</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Twitter</li>
-                <li className="hover:text-foreground transition-colors cursor-pointer">Newsletter</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t mt-12 pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 Urvann Plant Store. All rights reserved.</p>
-          </div>
+      <footer className="bg-green-600 text-white py-16">
+  <div className="container mx-auto px-4">
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-12">
+      {/* About Section */}
+      <div className="md:col-span-1">
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="flex items-center justify-center rounded-lg">
+                <Image
+                  src="/logo.jpeg"
+                  alt="Urvann Logo"
+                  width={35}
+                  height={35}
+                  className="object-contain"
+                />
+              </div>
+          <span className="text-2xl font-bold">urvann</span>
         </div>
-      </footer>
+        <p className="text-sm leading-relaxed">
+          Your trusted partner in bringing nature closer to home with premium quality plants and expert care guidance.
+        </p>
+      </div>
+
+      {/* Categories Section */}
+      <div>
+        <h3 className="font-semibold text-lg mb-4">Categories</h3>
+        <ul className="space-y-3 text-sm">
+          <li className="hover:text-green-200 transition-colors cursor-pointer">Indoor Plants</li>
+          <li className="hover:text-green-200 transition-colors cursor-pointer">Outdoor Plants</li>
+          <li className="hover:text-green-200 transition-colors cursor-pointer">Succulents</li>
+          <li className="hover:text-green-200 transition-colors cursor-pointer">Flowering Plants</li>
+        </ul>
+      </div>
+
+      {/* Support Section */}
+      <div>
+        <h3 className="font-semibold text-lg mb-4">Support</h3>
+        <ul className="space-y-3 text-sm">
+          <li className="hover:text-green-200 transition-colors cursor-pointer">Plant Care Guide</li>
+          <li className="hover:text-green-200 transition-colors cursor-pointer">Delivery Info</li>
+          <li className="hover:text-green-200 transition-colors cursor-pointer">Return Policy</li>
+          <li className="hover:text-green-200 transition-colors cursor-pointer">Contact Us</li>
+        </ul>
+      </div>
+
+      {/* Connect Section */}
+      <div>
+        <h3 className="font-semibold text-lg mb-4">Connect</h3>
+        <div className="flex space-x-3">
+          <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 p-1 h-8 w-8">
+            <Instagram className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 p-1 h-8 w-8">
+            <Facebook className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 p-1 h-8 w-8">
+            <Youtube className="w-4 h-4" />
+          </Button>
+          <Button variant="ghost" size="sm" className="text-white hover:bg-white/20 p-1 h-8 w-8">
+            <Linkedin className="w-4 h-4" />
+          </Button>
+        </div>
+      </div>
+    </div>
+
+    {/* Copyright Section */}
+    <div className="border-t border-white/20 mt-12 pt-8 text-center text-sm">
+      <p>&copy; 2025 Urvann Plant Store. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
 
       {showScrollTop && (
         <Button
