@@ -6,7 +6,7 @@ import Category from './models/category.model';
 import Plant from './models/plant.model';
 import connectDB from './config/db';
 
-dotenv.config();
+dotenv.config({path:'../.env'});
 
 const seed = async () => {
     try {
