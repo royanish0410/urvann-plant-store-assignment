@@ -17,7 +17,6 @@ export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [selectedDifficulty, setSelectedDifficulty] = useState("All")
   const [selectedLight, setSelectedLight] = useState("All")
-  const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000])
   const [showScrollTop, setShowScrollTop] = useState(false)
 
   useEffect(() => {
@@ -59,7 +58,6 @@ export default function HomePage() {
     setSelectedCategory("All")
     setSelectedDifficulty("All")
     setSelectedLight("All")
-    setPriceRange([0, 5000])
   }
 
   if (loading) {
@@ -197,7 +195,7 @@ export default function HomePage() {
                   </div>
                   <h3 className="text-xl font-semibold mb-2">No plants found</h3>
                   <p className="text-muted-foreground mb-6">
-                    We couldn't find any plants matching your criteria. Try adjusting your filters.
+                    We couldn&apos;t find any plants matching your criteria. Try adjusting your filters.
                   </p>
                   <Button onClick={clearFilters} variant="outline" size="lg">
                     Clear All Filters

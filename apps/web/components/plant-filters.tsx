@@ -28,7 +28,6 @@ function FilterContent({
   onDifficultyChange,
   onLightChange,
   onClearFilters,
-  resultCount,
 }: PlantFiltersProps) {
   return (
     <div className="space-y-6">

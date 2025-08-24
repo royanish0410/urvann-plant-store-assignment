@@ -85,8 +85,8 @@ export class ApiClient {
     })
   }
 
-  async getStats(): Promise<ApiResponse<any>> {
-    return this.request<any>("/plants/stats")
+  async getStats(): Promise<ApiResponse<unknown>> {
+    return this.request<unknown>("/plants/stats")
   }
 }
 

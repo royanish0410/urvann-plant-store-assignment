@@ -14,7 +14,6 @@ import {
   Leaf,
   Check,
   AlertCircle,
-  X
 } from "lucide-react"
 import Link from "next/link"
 
@@ -128,12 +127,12 @@ export default function AdminPage() {
       // Clear success message after 3 seconds
       setTimeout(() => setSubmitStatus('idle'), 3000)
 
-    } catch (error) {
+    } catch {
       setSubmitStatus('error')
       setTimeout(() => setSubmitStatus('idle'), 3000)
     } finally {
       setIsSubmitting(false)
-    }
+    }    
   }
 
   const handleInputChange = (field: keyof FormData, value: string | boolean) => {
