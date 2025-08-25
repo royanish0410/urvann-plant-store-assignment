@@ -81,7 +81,7 @@ export function PlantCard({ plant }: PlantCardProps) {
       </CardContent>
       <CardFooter className="p-4 pt-0 flex items-center justify-between">
         <div className="flex flex-col">
-          <span className="text-2xl font-bold text-primary">₹{(plant.price / 100).toFixed(0)}</span>
+          <span className="text-2xl font-bold text-primary">₹{(plant.price).toFixed(0)}</span>
           <span className="text-xs text-muted-foreground">Free Delivery</span>
         </div>
         <Button
